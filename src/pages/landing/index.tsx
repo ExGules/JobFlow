@@ -1,10 +1,10 @@
-// Первая страница 
+import { Container } from "@/shared/ui/container";
 
 export const LandingPage = () => {
   return (
-    <div>
+    <Container>
       <h1>JobFlow</h1>
-      <p>Отслеживайте заявки. Получайте приглашения на собеседования. Получайте предложения о работе.</p>
-    </div>
+      <p>Отслеживайте вакансии, проходите собеседования и получайте офферы.</p>
+    </Container>
   );
 };
