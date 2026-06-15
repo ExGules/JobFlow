@@ -1,30 +1,56 @@
-import { PageLayout } from "@/shared/ui/page-layout";
 import { Button } from "@/shared/ui/button";
 import { Card } from "@/shared/ui/card";
-import { Input } from "@/shared/ui/input";
+import { PageLayout } from "@/shared/ui/page-layout";
 
 export const LandingPage = () => {
   return (
     <PageLayout>
-      <h1 className="text-4xl font-bold">
-        JobFlow
-      </h1>
+      <section className="flex flex-col items-center py-16 text-center">
+        <h1 className="text-5xl font-bold tracking-tight">
+          JobFlow
+        </h1>
 
-      <p className="mt-4 text-lg text-[var(--color-text-secondary)]">
-        Отслеживайте вакансии, проходите собеседования и получайте офферы.
-      </p>
+        <p className="mt-6 max-w-2xl text-lg text-[var(--color-text-secondary)]">
+          Организуйте поиск работы в одном месте.
+          Отслеживайте вакансии, собеседования и офферы без таблиц и блокнотов.
+        </p>
 
-      <div className="mt-8 max-w-md">
+        <Button className="mt-8">
+          Начать работу
+        </Button>
+      </section>
+
+      <section className="mt-12 grid gap-6 md:grid-cols-3">
         <Card>
-          <Input
-            placeholder="Поиск вакансии..."
-          />
+          <h3 className="font-semibold">
+            Управление вакансиями
+          </h3>
 
-          <Button className="mt-4 w-full">
-            Начать работу
-          </Button>
+          <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
+            Храните все вакансии в одном месте и не теряйте важные ссылки.
+          </p>
         </Card>
-      </div>
+
+        <Card>
+          <h3 className="font-semibold">
+            Контроль собеседований
+          </h3>
+
+          <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
+            Следите за этапами отбора и планируйте следующие шаги.
+          </p>
+        </Card>
+
+        <Card>
+          <h3 className="font-semibold">
+            Аналитика откликов
+          </h3>
+
+          <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
+            Анализируйте количество откликов, интервью и полученных офферов.
+          </p>
+        </Card>
+      </section>
     </PageLayout>
   );
 };
