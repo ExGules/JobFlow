@@ -1,5 +1,7 @@
-import { Button } from "@/shared/ui/button";
 import { PageLayout } from "@/shared/ui/page-layout";
+import { Button } from "@/shared/ui/button";
+import { Card } from "@/shared/ui/card";
+import { Input } from "@/shared/ui/input";
 
 export const LandingPage = () => {
   return (
@@ -12,9 +14,17 @@ export const LandingPage = () => {
         Отслеживайте вакансии, проходите собеседования и получайте офферы.
       </p>
 
-      <Button className="mt-8">
-        Начать работу
-      </Button>
+      <div className="mt-8 max-w-md">
+        <Card>
+          <Input
+            placeholder="Поиск вакансии..."
+          />
+
+          <Button className="mt-4 w-full">
+            Начать работу
+          </Button>
+        </Card>
+      </div>
     </PageLayout>
   );
 };
