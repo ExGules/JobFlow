@@ -3,7 +3,7 @@
 Что сделано 14.06.2026:
 
 Создан проект на React + TypeScript + Vite : JobFlow
-Подключён Tailwind CSS v4 
+Подключён Tailwind CSS v4
 Настроены alias через @
 Подключён React Query : query-client.ts
 Настроен React Router : router.tsx
@@ -13,15 +13,15 @@
 src/
 app/
 ├── providers/
-    └──query-client.ts
+└──query-client.ts
 ├── router/
-    └──router.tsx
+└──router.tsx
 ├── styles/
-    └── globals.css
+└── globals.css
 assets/
 pages/
 ├── landing/
-    └──index.tsx
+└──index.tsx
 ├── dashboard/
 ├── jobs/
 ├── analytics/
@@ -36,13 +36,13 @@ shared/
 ├── types/
 ├── constants/
 ├── ui/container/
-   └──index.tsx
+└──index.tsx
 App.tsx
 main.tsx
 
 Сделан первый UI-компонент (Container): ui/container/index.tsx
 
-                                                                            Спринт 2: 
+                                                                            Спринт 2:
 
 Что сделано 15.06.2026:
 
@@ -111,3 +111,43 @@ Hero-блок
 управление вакансиями
 контроль собеседований
 аналитика откликов
+
+                                                                            Спринт 3:
+
+Что сделано 16.06.2026:
+
+--UI--
+Страница авторизации
+Переключение режимов:
+Вход ↔ Регистрация
+Управляемая форма
+
+--Supabase--
+Создан проект
+Подключён клиент Supabase
+Настроены переменные окружения
+VITE_SUPABASE_URL
+VITE_SUPABASE_ANON_KEY
+
+--Логика--
+Регистрация пользователя
+supabase.auth.signUp()
+Вход пользователя
+supabase.auth.signInWithPassword()
+Обработка ошибок
+Состояние загрузки
+Очистка формы после регистрации
+
+--Навигация--
+Переход:
+/ → /auth → /dashboard
+
+Пользователь открыл сайт
+↓
+Перешёл на страницу входа
+↓
+Зарегистрировался
+↓
+Вошёл в систему
+↓
+Попал в Dashboard
