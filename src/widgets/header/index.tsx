@@ -15,7 +15,7 @@ export const Header = () => {
           </Link>
 
           <Link
-            to="/login"
+            to="/auth"
             className="text-sm font-medium text-[var(--color-primary)] transition-colors hover:text-[var(--color-primary-hover)]"
           >
             Войти
