@@ -1,73 +1,113 @@
-# React + TypeScript + Vite
+                                                                             Спринт 1:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Что сделано 14.06.2026:
 
-Currently, two official plugins are available:
+Создан проект на React + TypeScript + Vite : JobFlow
+Подключён Tailwind CSS v4 
+Настроены alias через @
+Подключён React Query : query-client.ts
+Настроен React Router : router.tsx
+Создана первая страница : landing/ index.tsx
+Начата структура проекта по FSD Light:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+src/
+app/
+├── providers/
+    └──query-client.ts
+├── router/
+    └──router.tsx
+├── styles/
+    └── globals.css
+assets/
+pages/
+├── landing/
+    └──index.tsx
+├── dashboard/
+├── jobs/
+├── analytics/
+├── auth/
+widgets/
+features/
+entities/
+shared/
+├── api/
+├── hooks/
+├── lib/
+├── types/
+├── constants/
+├── ui/container/
+   └──index.tsx
+App.tsx
+main.tsx
 
-## React Compiler
+Сделан первый UI-компонент (Container): ui/container/index.tsx
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+                                                                            Спринт 2: 
 
-## Expanding the ESLint configuration
+Что сделано 15.06.2026:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Создан компонент PageLayout
+src/shared/ui/page-layout/index.tsx
+В нем:
+-единый каркас страниц приложения
+-подключение общих элементов интерфейса
+-обеспечение одинаковой структуры всех экранов
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+В дальнейшем через него будут отображаться:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+-Dashboard-
+-Jobs-
+-Analytics-
+-Auth-
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Создан Header
+src/widgets/header/index.tsx
+Реализована базовая шапка приложения:
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+-логотип JobFlow-
+-ссылка на страницу авторизации (Вход)-
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Header подключён в PageLayout и отображается на всех страницах.
+В проект добавлена единая цветовая палитра.
+Определены CSS-переменные:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+--color-primary
+--color-primary-hover
+--color-background
+--color-surface
+--color-text
+--color-text-secondary
+--color-border
+
+Создание базовых UI-компонентов:
+
+--Button--
+src/shared/ui/button/index.tsx
+Используется для всех действий пользователя
+
+--Input--
+src/shared/ui/input/index.tsx
+Используется для форм авторизации, поиска и создания вакансий.
+
+--Card--
+src/shared/ui/card/index.tsx
+Используется для отображения:
+вакансий
+аналитики
+карточек статистики
+форм
+Создание Landing Page v1
+
+Добавлены:
+
+Hero-блок
+название проекта
+описание
+кнопку действия
+Блок преимуществ
+
+Отображает основные возможности приложения:
+
+управление вакансиями
+контроль собеседований
+аналитика откликов
