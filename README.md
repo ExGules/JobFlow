@@ -151,3 +151,43 @@ supabase.auth.signInWithPassword()
 Вошёл в систему
 ↓
 Попал в Dashboard
+
+                                                                           Спринт 4:
+
+Что сделано 18.06.2026
+--AuthStore--
+
+Создал глобальное состояние:
+src/features/auth/model/auth-store.ts
+AuthProvider
+
+Создал:
+src/app/providers/auth-provider.tsx
+Он:
+
+При запуске:
+supabase.auth.getUser()
+записывает пользователя в Zustand.
+Отслеживает изменения:
+supabase.auth.onAuthStateChange()
+реагирует на:
+Вход
+Выход
+Обновление сессии
+Восстановление после F5
+
+Проверил:
+
+F5 работает
+
+Создал
+src/app/router/protected-route.tsx
+Очистил LocalStorage
+Открыл /dashboard
+Перекинуло на /auth
+
+Выход из системы:
+Кнопка выйти
+supabase.auth.signOut() завершил сессию
+Очистка состояния Zustand
+Редирект на /auth
