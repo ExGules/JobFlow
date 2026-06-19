@@ -18,8 +18,10 @@ export const createJob = async (
     .single();
 
     if (error) {
-        throw error;
-    }
+  console.error("Ошибка Supabase:", error);
+
+  throw new Error(error.message);
+}
 
     return data as Job;
 };
