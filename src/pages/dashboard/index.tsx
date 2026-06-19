@@ -47,11 +47,18 @@ export const DashboardPage = () => {
     try {
       setIsLoading(true);
 
-      const { data: { user } } = await supabase.auth.getUser();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
 
       if (!user) throw new Error("Пользователь не найден.");
 
-      const newJob = await createJob({ user_id: user.id, company, position, notes });
+      const newJob = await createJob({
+        user_id: user.id,
+        company,
+        position,
+        notes,
+      });
 
       // Добавляем новую вакансию в список без перезагрузки
       setJobs((prev) => [newJob, ...prev]);
@@ -62,7 +69,11 @@ export const DashboardPage = () => {
       setMessage("Вакансия успешно добавлена.");
     } catch (error) {
       console.error(error);
-      setMessage(error instanceof Error ? error.message : "Не удалось добавить вакансию.");
+      setMessage(
+        error instanceof Error
+          ? error.message
+          : "Не удалось добавить вакансию.",
+      );
     } finally {
       setIsLoading(false);
     }
@@ -77,15 +88,29 @@ export const DashboardPage = () => {
             Отслеживайте свои вакансии.
           </p>
         </div>
-        <Button type="button" onClick={handleLogout}>Выйти</Button>
+        <Button type="button" onClick={handleLogout}>
+          Выйти
+        </Button>
       </div>
 
       <Card className="mt-8">
         <h2 className="text-xl font-semibold">Добавить вакансию</h2>
         <form onSubmit={handleCreateJob} className="mt-6 space-y-4">
-          <Input placeholder="Компания" value={company} onChange={(e) => setCompany(e.target.value)} />
-          <Input placeholder="Должность" value={position} onChange={(e) => setPosition(e.target.value)} />
-          <Input placeholder="Заметки" value={notes} onChange={(e) => setNotes(e.target.value)} />
+          <Input
+            placeholder="Компания"
+            value={company}
+            onChange={(e) => setCompany(e.target.value)}
+          />
+          <Input
+            placeholder="Должность"
+            value={position}
+            onChange={(e) => setPosition(e.target.value)}
+          />
+          <Input
+            placeholder="Заметки"
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+          />
           <Button type="submit" disabled={isLoading}>
             {isLoading ? "Добавление..." : "Добавить вакансию"}
           </Button>
@@ -97,14 +122,18 @@ export const DashboardPage = () => {
       <div className="mt-8 space-y-4">
         <h2 className="text-xl font-semibold">Мои вакансии ({jobs.length})</h2>
         {jobs.length === 0 ? (
-          <p className="text-[var(--color-text-secondary)]">Вакансий пока нет.</p>
+          <p className="text-[var(--color-text-secondary)]">
+            Вакансий пока нет.
+          </p>
         ) : (
           jobs.map((job) => (
             <Card key={job.id}>
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="font-semibold">{job.company}</h3>
-                  <p className="text-sm text-[var(--color-text-secondary)]">{job.position}</p>
+                  <p className="text-sm text-[var(--color-text-secondary)]">
+                    {job.position}
+                  </p>
                   {job.notes && <p className="text-sm mt-1">{job.notes}</p>}
                 </div>
                 <span className="text-sm px-3 py-1 rounded-full bg-[var(--color-bg-secondary)]">
