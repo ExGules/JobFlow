@@ -16,10 +16,6 @@ export const AnalyticsPage = () => {
 
   const { totalJobs, activeJobs, offers, rejections } = getJobStats(jobs);
 
-  const offers = jobs.filter((job) => job.status === "Оффер").length;
-
-  const rejections = jobs.filter((job) => job.status === "Отказ").length;
-
   const statusCounts = jobs.reduce<Record<string, number>>((acc, job) => {
     acc[job.status] = (acc[job.status] || 0) + 1;
     return acc;
