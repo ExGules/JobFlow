@@ -67,10 +67,6 @@ npm run dev
 npm run test
 \```
 
-## Скриншоты
-
-_(добавить после деплоя)_
-
 ## Демо
 
 https://job-flow-ivory.vercel.app
