@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { getJobs } from "@/shared/api/jobs";
 import { PieChart } from "@mui/x-charts/PieChart";
 import type { Job } from "@/entities/job/model/types";
-
+import { getJobStats } from "@/shared/lib/job-stats";
 import { Card } from "@/shared/ui/card";
 import { PageLayout } from "@/shared/ui/page-layout";
 
@@ -14,11 +14,7 @@ export const AnalyticsPage = () => {
     getJobs().then(setJobs).catch(console.error);
   }, []);
 
-  const totalJobs = jobs.length;
-
-  const activeJobs = jobs.filter(
-    (job) => !["Оффер", "Отказ"].includes(job.status),
-  ).length;
+  const { totalJobs, activeJobs, offers, rejections } = getJobStats(jobs);
 
   const offers = jobs.filter((job) => job.status === "Оффер").length;
 
