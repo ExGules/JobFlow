@@ -3,6 +3,7 @@ import { AuthPage } from "@/pages/auth";
 import { LandingPage } from "@/pages/landing";
 import { DashboardPage } from "@/pages/dashboard";
 import { ProtectedRoute } from "@/app/router/protected-route";
+import { AnalyticsPage } from "@/pages/analytics";
 
 export const router = createBrowserRouter([
   {
@@ -10,15 +11,23 @@ export const router = createBrowserRouter([
     element: <LandingPage />,
   },
   {
-  path: "/auth",
-  element: <AuthPage />,
+    path: "/auth",
+    element: <AuthPage />,
   },
   {
-  path: "/dashboard",
-  element: (
-    <ProtectedRoute>
-      <DashboardPage />
-    </ProtectedRoute>
-  ),
-},
+    path: "/dashboard",
+    element: (
+      <ProtectedRoute>
+        <DashboardPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/analytics",
+    element: (
+      <ProtectedRoute>
+        <AnalyticsPage />
+      </ProtectedRoute>
+    ),
+  },
 ]);
