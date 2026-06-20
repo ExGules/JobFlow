@@ -37,4 +37,36 @@ export const getJobs = async () => {
     }
 
     return data as Job[];
-}
+};
+
+export const updateJobStatus = async (
+    id: string,
+    status: string,
+) => {
+    const { data, error } = await supabase
+    .from("jobs")
+    .update({
+        status,
+    })
+    .eq("id", id)
+    .select()
+    .single();
+
+    if ( error ) {
+        throw error;
+    }
+    return data as Job;
+};
+
+export const deleteJob = async (
+    id: string,
+) => {
+    const { error } = await supabase
+    .from("jobs")
+    .delete()
+    .eq("id", id);
+
+    if ( error ) {
+        throw error;
+    }
+};
