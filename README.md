@@ -1,220 +1,76 @@
-                                                                             Спринт 1:
 
-Что сделано 14.06.2026:
 
-Создан проект на React + TypeScript + Vite : JobFlow
-Подключён Tailwind CSS v4
-Настроены alias через @
-Подключён React Query : query-client.ts
-Настроен React Router : router.tsx
-Создана первая страница : landing/ index.tsx
-Начата структура проекта по FSD Light:
+# JobFlow
 
+Веб-приложение для отслеживания отклика на вакансии: статус, заметки и аналитика поиска работы в одном месте.
+
+## Стек технологий
+
+- React 19 + TypeScript
+- Vite
+- Tailwind CSS v4
+- Supabase (Auth + PostgreSQL + Row Level Security)
+- React Router
+- React Hook Form + Zod
+- Zustand
+- Framer Motion
+- MUI X Charts
+- Vitest + Testing Library
+
+## Функциональность
+
+- Регистрация и вход через Supabase Auth
+- Защищённые маршруты (доступ только для авторизованных пользователей)
+- Создание, изменение статуса и удаление вакансий
+- Row Level Security: каждый пользователь видит только свои данные
+- Страница аналитики со статистикой и круговой диаграммой по статусам
+- Плавные анимации появления и удаления карточек
+- Адаптивный интерфейс
+
+## Архитектура
+
+Проект построен по принципам Feature-Sliced Design (light-версия):
+
+\```
 src/
-app/
-├── providers/
-└──query-client.ts
-├── router/
-└──router.tsx
-├── styles/
-└── globals.css
-assets/
-pages/
-├── landing/
-└──index.tsx
-├── dashboard/
-├── jobs/
-├── analytics/
-├── auth/
-widgets/
-features/
-entities/
-shared/
-├── api/
-├── hooks/
-├── lib/
-├── types/
-├── constants/
-├── ui/container/
-└──index.tsx
-App.tsx
-main.tsx
+├── app/          # инициализация приложения, провайдеры, роутинг
+├── pages/        # страницы (landing, auth, dashboard, analytics)
+├── widgets/      # композитные блоки интерфейса (header)
+├── entities/     # бизнес-сущности (job)
+├── shared/       # переиспользуемые UI-компоненты, API, утилиты
+\```
 
-Сделан первый UI-компонент (Container): ui/container/index.tsx
+## Установка и запуск
 
-                                                                            Спринт 2:
+\```bash
+git clone https://github.com/your-username/jobflow.git
+cd jobflow
+npm install
+\```
 
-Что сделано 15.06.2026:
+Создайте файл `.env` со следующими переменными:
 
-Создан компонент PageLayout
-src/shared/ui/page-layout/index.tsx
-В нем:
--единый каркас страниц приложения
--подключение общих элементов интерфейса
--обеспечение одинаковой структуры всех экранов
+\```
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+\```
 
-В дальнейшем через него будут отображаться:
+Запуск в режиме разработки:
 
--Dashboard-
--Jobs-
--Analytics-
--Auth-
+\```bash
+npm run dev
+\```
 
-Создан Header
-src/widgets/header/index.tsx
-Реализована базовая шапка приложения:
+Запуск тестов:
 
--логотип JobFlow-
--ссылка на страницу авторизации (Вход)-
+\```bash
+npm run test
+\```
 
-Header подключён в PageLayout и отображается на всех страницах.
-В проект добавлена единая цветовая палитра.
-Определены CSS-переменные:
+## Скриншоты
 
---color-primary
---color-primary-hover
---color-background
---color-surface
---color-text
---color-text-secondary
---color-border
+_(добавить после деплоя)_
 
-Создание базовых UI-компонентов:
+## Демо
 
---Button--
-src/shared/ui/button/index.tsx
-Используется для всех действий пользователя
-
---Input--
-src/shared/ui/input/index.tsx
-Используется для форм авторизации, поиска и создания вакансий.
-
---Card--
-src/shared/ui/card/index.tsx
-Используется для отображения:
-вакансий
-аналитики
-карточек статистики
-форм
-Создание Landing Page v1
-
-Добавлены:
-
-Hero-блок
-название проекта
-описание
-кнопку действия
-Блок преимуществ
-
-Отображает основные возможности приложения:
-
-управление вакансиями
-контроль собеседований
-аналитика откликов
-
-                                                                            Спринт 3:
-
-Что сделано 16.06.2026:
-
---UI--
-Страница авторизации
-Переключение режимов:
-Вход ↔ Регистрация
-Управляемая форма
-
---Supabase--
-Создан проект
-Подключён клиент Supabase
-Настроены переменные окружения
-VITE_SUPABASE_URL
-VITE_SUPABASE_ANON_KEY
-
---Логика--
-Регистрация пользователя
-supabase.auth.signUp()
-Вход пользователя
-supabase.auth.signInWithPassword()
-Обработка ошибок
-Состояние загрузки
-Очистка формы после регистрации
-
---Навигация--
-Переход:
-/ → /auth → /dashboard
-
-Пользователь открыл сайт
-↓
-Перешёл на страницу входа
-↓
-Зарегистрировался
-↓
-Вошёл в систему
-↓
-Попал в Dashboard
-
-                                                                           Спринт 4:
-
-Что сделано 18.06.2026
---AuthStore--
-
-Создал глобальное состояние:
-src/features/auth/model/auth-store.ts
-AuthProvider
-
-Создал:
-src/app/providers/auth-provider.tsx
-Он:
-
-При запуске:
-supabase.auth.getUser()
-записывает пользователя в Zustand.
-Отслеживает изменения:
-supabase.auth.onAuthStateChange()
-реагирует на:
-Вход
-Выход
-Обновление сессии
-Восстановление после F5
-
-Проверил:
-
-F5 работает
-
-Создал
-src/app/router/protected-route.tsx
-Очистил LocalStorage
-Открыл /dashboard
-Перекинуло на /auth
-
-Выход из системы:
-Кнопка выйти
-supabase.auth.signOut() завершил сессию
-Очистка состояния Zustand
-Редирект на /auth
-
-                                                                        Спринт 5:
-
-Что сделано 20.06.2026
-
----Supabase---
-
-Создана таблица jobs с полями id, user_id, company, position, status, notes, applied_at, created_at
-Настроены RLS политики — каждый пользователь видит только свои вакансии
-
-API (jobs.ts)
-
-createJob() — создание вакансии с привязкой к пользователю
-getJobs() — получение вакансий текущего пользователя, отсортированных по дате
-
-Dashboard
-
-Форма добавления вакансии (компания, должность, заметки)
-После добавления вакансия сразу появляется в списке без перезагрузки страницы
-Список карточек с названием компании, должностью, заметками и статусом
-
-Авторизация ✅
-Защита маршрутов ✅
-Выход из аккаунта ✅
-Подключение Supabase ✅
-Создание вакансий ✅
-Отображение вакансий ✅
+_(ссылка на Vercel после деплоя)_
