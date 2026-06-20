@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 
 import { signOut } from "@/shared/api/auth";
 import {
@@ -172,35 +173,49 @@ export const DashboardPage = () => {
             Вакансий пока нет.
           </p>
         ) : (
-          jobs.map((job) => (
-            <Card key={job.id}>
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="font-semibold">{job.company}</h3>
-                  <p className="text-sm text-[var(--color-text-secondary)]">
-                    {job.position}
-                  </p>
-                  {job.notes && <p className="text-sm mt-1">{job.notes}</p>}
-                </div>
-                <select
-                  value={job.status}
-                  onChange={(event) =>
-                    handleStatusChange(job.id, event.target.value)
-                  }
-                  className="rounded-lg border px-3 py-2 text-sm"
-                >
-                  {JOB_STATUSES.map((status) => (
-                    <option key={status} value={status}>
-                      {status}
-                    </option>
-                  ))}
-                </select>
-                <Button type="button" onClick={() => handleDeleteJob(job.id)}>
-                  Удалить
-                </Button>
-              </div>
-            </Card>
-          ))
+          <AnimatePresence>
+            {jobs.map((job) => (
+              <motion.div
+                key={job.id}
+                layout
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Card>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="font-semibold">{job.company}</h3>
+                      <p className="text-sm text-[var(--color-text-secondary)]">
+                        {job.position}
+                      </p>
+                      {job.notes && <p className="text-sm mt-1">{job.notes}</p>}
+                    </div>
+                    <select
+                      value={job.status}
+                      onChange={(event) =>
+                        handleStatusChange(job.id, event.target.value)
+                      }
+                      className="rounded-lg border px-3 py-2 text-sm"
+                    >
+                      {JOB_STATUSES.map((status) => (
+                        <option key={status} value={status}>
+                          {status}
+                        </option>
+                      ))}
+                    </select>
+                    <Button
+                      type="button"
+                      onClick={() => handleDeleteJob(job.id)}
+                    >
+                      Удалить
+                    </Button>
+                  </div>
+                </Card>
+              </motion.div>
+            ))}
+          </AnimatePresence>
         )}
       </div>
     </PageLayout>
